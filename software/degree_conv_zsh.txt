@@ -1,0 +1,35 @@
+#!/bin/zsh
+#
+# Convert temperature from Fahrenheit to Celsius degrees
+#
+# $Id:$
+
+autoload zcalc
+
+float degreeF degreeC
+
+## zcalc
+
+AWK=$(which gawk)
+BC=$(which bc)
+CALC=$(which calc)
+LUA=$(which lua)
+
+echo "Running $0 using $AWK"
+echo
+echo -ne "Enter the temperature in degrees of Fahrenheit: "
+read -r ask
+degreeF=$(( ask + 0.0 ))
+printf "The input value is %0.02f Fahrenheit degrees.\n" $degreeF
+
+#degreeC=$(bc -lq <<< "($degreeF - 32) * (5/9)")
+#degreeC=$(echo "($degreeF - 32) / 1.8; quit" | "$CALC" -i)
+##${LUA} -e "local ans = ($degreeF - 32) / 1.8; print(string.format(\"The answer is %0.2f Celsius degrees.\", ans))"
+
+${AWK} -v f="$degreeF" 'BEGIN {printf("The temperature in Celsius is %0.2f\n", (f - 32) / 1.8);}'
+
+##echo
+##printf "The answer is %0.2f Celsius degrees.\n" $degreeC
+echo
+
+# End of Script

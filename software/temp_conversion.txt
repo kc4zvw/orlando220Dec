@@ -1,0 +1,57 @@
+//
+// Perform both Celsius and Fahrenheit conversions
+//
+// $Id:$
+//
+
+#include <stdio.h>
+#include <string.h>
+
+#define STRLEN 3
+
+int query_functions(const char *str)
+{
+    int ans;
+
+    if (strncmp("CF", str, 2) == 0)
+        ans = 1;
+    else if (strncmp("FC", str, 2) == 0)
+        ans = 2;
+    else
+        ans = 0;
+
+    return ans;
+}
+
+
+int main()
+{
+    double celsius, fahrenheit, temp = 0.0;
+    char answer[STRLEN];
+    int query;
+
+    printf("Type 'CF' if you want to convert from Celsius to Fahrenheit, and 'FC' if you want to convert from Fahrenheit to Celsius: ");
+    fgets(answer, STRLEN, stdin);
+
+    printf("The user input was the string: %s\n", answer);
+    query = query_functions(answer);
+
+    if (query == 1) {
+        printf("Type the temperature in Celsius: ");
+        scanf("%lf", &temp);
+        fahrenheit = (temp * 1.8) + 32;
+        printf("The answer is %6.2f degrees (Fahrenheit).\n", fahrenheit);
+    } else if (query == 2) {
+        printf("Type the temperature in Fahrenheit: ");
+        scanf("%lf", &temp);
+        celsius = (temp - 32) / 1.8;
+        printf("The answer is %6.2f degrees (Celsius).\n", celsius);
+    } else {
+        printf("Invalid input string!\n");
+        return 2;
+    }
+
+    return 0;
+}
+
+/* End of File */

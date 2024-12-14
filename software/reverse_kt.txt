@@ -1,0 +1,215 @@
+
+/* Filename: reverse.kt -- Kotlin version */
+
+/* ******************************************************************
+   ***
+   ***   Author: David Billsbrough 
+   ***  Created: Tuesday, September 03, 2024 at 04:26:42 AM (EDT)
+   ***  Version: $Revision: 0.38 $
+   ***  License: GNU General Public License -- version 2
+   ***  Warranty: None
+   ***
+   ***  Purpose: port of REVERSE.BAS from 100 BASIC Games
+   ***
+   ******************************************************************/
+
+// $Id: reverse.kt,v 0.38 2024/12/12 21:19:10 kc4zvw Exp kc4zvw $
+
+import java.util.Scanner
+
+val space: String = " "
+val spc1: String = space.repeat(32)
+val spc2: String = space.repeat(16)
+
+val numCount = 9
+
+
+/*  Play the main game  */
+
+fun game_loop() {
+
+	/* Make a random list from 1 to numCount */
+
+	var numbers = intArrayOf( 1, 2, 3, 4, 5, 6, 7, 8, 9 )
+	numbers.shuffle()
+
+	/* Print original list and start the game */
+
+	println()
+	println("Here we go ... The list is:")
+
+	print_list(numbers)
+
+	var turns: Int = 0
+
+	while (true) {						/* while True forever */
+		var howMany: Int = 0
+
+		try {
+			print("How many shall I reverse? ")
+			howMany = readln().toInt()
+
+        } catch (e: NumberFormatException) {
+		    println("\nA string is not a valid representation of a number: ${e.message}")
+
+        } catch (e: IllegalArgumentException) {
+            println("\nThe radix is not a valid radix for string to number conversion: ${e.message}")
+
+        } finally {
+            // break
+	    }
+
+		assert( howMany < 0 ) { "Assertion failed: howMany is less than zero" }
+
+		if ( howMany == 0) {
+			return
+		}
+
+		if ( howMany > numCount ) {
+			println("\nOOPS! Wrong ... I can reverse at most $numCount")
+			continue
+		}
+
+		if ( howMany < 0 ) {
+			println("\nOOPS! ... This value cannot be a negitive number: $howMany")
+			continue
+		}
+
+		turns += 1
+
+		/* Reverse as many items as requested. */
+	
+		var newNums: IntArray = numbers.copyOfRange(0, howMany)
+		newNums.reverse()
+		newNums += numbers.copyOfRange(howMany, numbers.size)
+		numbers = copyArray(newNums)
+
+		print_list(numbers)
+
+		if (checkForWinner(numbers)) {
+			println("You won it in $turns moves!")
+			println()
+			return
+		}
+	}
+}
+
+/*  *** Subroutine to check for a win */
+
+fun checkForWinner(numbers: IntArray): Boolean {
+
+	var winner: Boolean = false
+	var index: Int = 0
+
+	for (n in numbers) {
+		if ((index + 1) == n) {
+			winner = true
+			index++
+			continue
+		} else {
+			winner = false
+			return winner
+		}
+	}
+	return winner
+}
+
+/*  *** Subroutine to copy an integer array */
+
+fun copyArray(source: IntArray): IntArray {
+	return source.copyOf(source.size)
+}
+
+/*	*** Subroutine to print the list of numbers */
+
+fun print_list(num: IntArray) {
+	println()
+	println("\n${num.contentToString()}\n")
+	println()
+}
+
+/*	*** Subroutine to print the banner */
+
+fun display_banner() {
+	println( "\n$spc1 REVERSE")
+	println( "$spc2 Creative Computing  --  Morristown, New Jersey\n\n")
+}
+
+
+/*	*** Subroutine to print the rules */
+
+fun print_the_rules() {
+
+	println()
+	println("This is the game of 'REVERSE'.  To win, all you have")
+	println("to do is arrange a list of numbers (1 through $numCount)")
+	println("in numerical order from left to right.  To move, you")
+	println("tell me how many numbers (Counting from the left) to")
+	println("reverse.  For example, if the current list is:")
+	println()
+	println("  2 3 4 5 1 6 7 8 9")
+	println()
+	println("and you reverse 4, the result will be:")
+	println()
+	println("  5 4 3 2 1 6 7 8 9")
+	println()
+	println("Now if you reverse 5, you win!")
+	println()
+	println("  1 2 3 4 5 6 7 8 9")
+	println()
+	println("No doubt you will like this game, but")
+	println("if you want to quit, reverse 0 (zero).")
+	println()
+}
+
+fun main() {
+	display_banner()
+
+	println("REVERSE -- A Game of Skill\n")
+
+	// Creates an instance which takes input from standard input (keyboard)
+	val reader = Scanner(System.`in`)
+
+	print("Do you want the rules? (yes/no) : ")
+
+	// Reads the next line from the keyboard
+	var string1 = readLine()!!
+
+	//println("You entered: $string1")
+
+	var ask: Boolean = string1.lowercase().startsWith("y")
+	// println("Boolean results: $ask")
+
+	if ( ask ) { 
+		print_the_rules()
+	}
+
+	while (true) {
+		println("\n\n *** Starting the game ...")
+		game_loop()
+		println("\n")
+
+		print("Try again? (yes/no) : ")
+
+		// Reads the next line from the keyboard
+		var str2 = readLine()!!
+		println("You entered: $str2")
+
+		var ask2: Boolean = str2.lowercase().startsWith("y")
+		// println("Boolean results: $ask2")
+
+		str2 ?: run {
+		    println("\nnull\n")
+		    ask2 = false
+		}
+
+		if ( ask2 ) { 
+			continue
+		} else {
+			break
+		}
+	}
+	println("\nOk ... Hope you had fun!!")
+}
+
+/* End of File */

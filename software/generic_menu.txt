@@ -1,0 +1,57 @@
+#!/bin/bash
+#
+# $Id:$
+
+echo
+echo A local menu of generic commands/programs
+echo
+echo " 1. a command of script to run"
+echo " 2. a command of script to run"
+echo " 3. a command of script to run"
+echo " 4. a command of script to run"
+echo " 5. a command of script to run"
+echo " 6. a command of script to run"
+echo " 7. a command of script to run"
+echo " 8. a command of script to run"
+echo " 9. a command of script to run"
+echo " 0. a command of script to run"
+echo " A. a command of script to run"
+echo " B. a command of script to run"
+echo " C. a command of script to run"
+echo " Q. Quit the menu"
+echo
+
+function ask_user
+{
+    echo -n "select system: "
+    read -r option
+}
+
+while : ;
+do
+    ask_user
+
+    echo
+    echo -e "processing option: $option"
+    echo
+
+    case $option in
+        1) eval "$HOME/bin/run.a.generic.cmd" ; break ;;
+        2) eval "$HOME/bin/run.a.generic.cmd" ; break ;;
+        3) eval "$HOME/bin/run.a.generic.cmd" ; break ;;
+        4) eval "$HOME/bin/run.a.generic.cmd" ; break ;;
+        5) eval "$HOME/bin/run.a.generic.cmd" ; break ;;
+        6) eval "$HOME/bin/run.a.generic.cmd" ; break ;;
+        7) eval "$HOME/bin/run.a.generic.cmd" ; break ;;
+        8) eval "$HOME/bin/run.a.generic.cmd" ; break ;;
+        9) eval "$HOME/bin/run.a.generic.cmd" ; break ;;
+        0) eval "$HOME/bin/run.a.generic.cmd" ; break ;;
+        'A'|'a') eval "$HOME/bin/run.a.generic.cmd" ; break ;;
+        'B'|'b') eval "$HOME/bin/run.a.generic.cmd" ; break ;;
+        'C'|'c') eval "$HOME/bin/run.a.generic.cmd" ; break ;;
+        'Q'|'q') echo "Finished" ; exit 0 ;;
+        *) echo -e "** Error: '$option' is not valid.\n" ; continue ;;
+    esac
+done
+
+# End of script

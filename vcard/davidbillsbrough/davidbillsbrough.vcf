@@ -1,0 +1,25 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Billsbrough;David;;;
+FN:David Billsbrough
+ORG:Stardust Data Systems, L.L.C.
+ADR;TYPE=WORK:560 E 2nd Street
+Chuluota, FL 32766
+TITLE:"C" embedded controller programmer
+TEL;TYPE=CELL:407-576-0082
+TEL;TYPE=WORK:321-244-7273
+TEL;TYPE=HOME:
+TEL;TYPE=MSG:fun stuff
+EMAIL;TYPE=WORK:billsbrough@gmx.com
+URL;TYPE=Digital Business Card:https://www.orlando220.org/vcard/kc4zvw
+URL:https://www.orlando220.org
+URL;TYPE=Website:https://www.orlando220.org
+URL;TYPE=Matrix:https://matrix.to/#/@kc4zvw:matrix.org
+URL;TYPE=Calendar:https://cal.com/davidbillsbrough
+URL;TYPE=Skype:skype:@dbillsbrough?chat
+URL;TYPE=Tumblr:https://@kc4zvw.tumblr.com/
+URL;TYPE=GitHub:https://github.com/kc4zvw
+KEY;TYPE=PGP;ENCODING=b:
+NOTE:Software programming
+UID:EnBizCard-100576508
+END:VCARD
