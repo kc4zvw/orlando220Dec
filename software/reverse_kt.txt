@@ -1,6 +1,8 @@
 
 /* Filename: reverse.kt -- Kotlin version */
 
+// vim: syntax=kotlin tabstop=4 nowrap:
+
 /* ******************************************************************
    ***
    ***   Author: David Billsbrough 

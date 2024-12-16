@@ -11,6 +11,7 @@ SIGLINE="$HOME/inject2$$.txt"
 WHICH=/usr/bin/which
 MAILER=$(${WHICH} mailx)
 REMOVE=$(${WHICH} rm)
+SED=$(${WHICH} sed)
 WATCHER=$(${WHICH} urlwatch)
 
 function append_report
@@ -28,8 +29,8 @@ function append_report
         --
         ETX
 
-        sed -i -e "s/^-- $/added/" $TEMP_REPORT
-        sed -i -e "/"^added"/ r $SIGLINE" $TEMP_REPORT
+        ${SED} -i -e "s/^-- $/added/" $TEMP_REPORT
+        ${SED} -i -e "/"^added"/ r $SIGLINE" $TEMP_REPORT
 }
 
 echo
